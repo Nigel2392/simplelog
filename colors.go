@@ -22,22 +22,22 @@ const (
 var (
 
 	// LogTest
-	DefaultLevel0 = Purple
+	ColorLevelTest = Purple
 
 	// LogDebug
-	DefaultLevel1 = Green
+	ColorLevelDebug = Green
 
 	// LogInfo
-	DefaultLevel2 = Blue
+	ColorLevelInfo = Blue
 
 	// LogWarn
-	DefaultLevel3 = Yellow
+	ColorLevelWarning = Yellow
 
 	// LogErr
-	DefaultLevel4 = Red
+	ColorLevelError = Red
 
 	// No level, default switch case opt.
-	DefaultNoLevel = Green
+	ColorNoLevel = Green
 )
 
 // Colorize a message based on the loglevel
@@ -45,17 +45,17 @@ func Colorize(level int, msg string) string {
 	var selected string
 	switch level {
 	case 0:
-		selected = DefaultLevel0
+		selected = ColorLevelTest
 	case 1:
-		selected = DefaultLevel1
+		selected = ColorLevelDebug
 	case 2:
-		selected = DefaultLevel2
+		selected = ColorLevelInfo
 	case 3:
-		selected = DefaultLevel3
+		selected = ColorLevelWarning
 	case 4:
-		selected = DefaultLevel4
+		selected = ColorLevelError
 	default:
-		selected = DefaultNoLevel
+		selected = ColorNoLevel
 	}
 	return selected + msg + Reset
 }
