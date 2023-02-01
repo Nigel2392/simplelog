@@ -34,17 +34,17 @@ type Logger interface {
 	// Set the standard output for errors
 	SetStdErr(std *os.File)
 	// Write a message
-	Write(t string, message ...any)
+	Write(t string, message string, args ...any)
 	// Write an error message
-	Error(msg ...any)
+	Error(msg any, args ...any)
 	// Write a warning message
-	Warning(msg ...any)
+	Warning(msg string, args ...any)
 	// Write an info message
-	Info(msg ...any)
+	Info(msg string, args ...any)
 	// Write a debug message
-	Debug(msg ...any)
+	Debug(msg string, args ...any)
 	// Write a test message
-	Test(msg ...any)
+	Test(msg string, args ...any)
 }
 
 // Default logger
