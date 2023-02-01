@@ -74,15 +74,15 @@ func (l *logger) GetLevel() int {
 
 func (l *logger) GetLevelFromType(t string) int {
 	switch t {
-	case "error":
+	case LogErr:
 		return 4
-	case "warning":
+	case LogWarn:
 		return 3
-	case "info":
+	case LogInfo:
 		return 2
-	case "debug":
+	case LogDebug:
 		return 1
-	case "test":
+	case LogTest:
 		return 0
 	default:
 		return 1
@@ -100,27 +100,27 @@ func (l *logger) Error(msg any, args ...any) {
 	default:
 		message = fmt.Sprint(msg)
 	}
-	l.Write("error", message, args...)
+	l.Write(LogErr, message, args...)
 }
 
 // Write a Warning message to the logger.
 func (l *logger) Warning(msg string, args ...any) {
-	l.Write("warning", msg, args...)
+	l.Write(LogWarn, msg, args...)
 }
 
 // Write a Info message to the logger.
 func (l *logger) Info(msg string, args ...any) {
-	l.Write("info", msg, args...)
+	l.Write(LogInfo, msg, args...)
 }
 
 // Write a Debug message to the logger.
 func (l *logger) Debug(msg string, args ...any) {
-	l.Write("debug", msg, args...)
+	l.Write(LogDebug, msg, args...)
 }
 
 // Write a Test message to the logger.
 func (l *logger) Test(msg string, args ...any) {
-	l.Write("test", msg, args...)
+	l.Write(LogTest, msg, args...)
 }
 
 // Wrap a message with time
