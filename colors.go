@@ -20,11 +20,17 @@ const (
 
 // Preset colors for use in the logger's Colorize function
 const (
-	DefaultLevel0  = Purple
-	DefaultLevel1  = Green
-	DefaultLevel2  = Blue
-	DefaultLevel3  = Yellow
-	DefaultLevel4  = Red
+	// LogTest
+	DefaultLevel0 = Purple
+	// LogDebug
+	DefaultLevel1 = Green
+	// LogInfo
+	DefaultLevel2 = Blue
+	// LogWarn
+	DefaultLevel3 = Yellow
+	// LogErr
+	DefaultLevel4 = Red
+	// No level, default switch case opt.
 	DefaultNoLevel = Green
 )
 
