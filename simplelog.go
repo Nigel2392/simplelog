@@ -129,8 +129,17 @@ func (l *logger) GetLevelFromType(t string) int {
 }
 
 // Write a Error message to the logger.
-func (l *logger) Error(msg string, args ...any) {
-	l.Write("error", msg, args...)
+func (l *logger) Error(msg any, args ...any) {
+	var message string
+	switch msg := msg.(type) {
+	case string:
+		message = msg
+	case error:
+		message = msg.Error()
+	default:
+		message = fmt.Sprint(msg)
+	}
+	l.Write("error", message, args...)
 }
 
 // Write a Warning message to the logger.
