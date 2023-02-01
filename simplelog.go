@@ -91,8 +91,13 @@ func (l *logger) getMessage(t string, msg string) string {
 	return ""
 }
 
-func (l *logger) Write(t string, message ...any) {
-	var msg string = fmt.Sprint(message...)
+func (l *logger) Write(t string, message string, args ...any) {
+	var msg string
+	if len(args) > 0 {
+		msg = fmt.Sprintf(message, args...)
+	} else {
+		msg = message
+	}
 	var console_msg = l.getMessage(t, msg)
 	if console_msg != "" {
 		if l.GetLevelFromType(t) >= 4 {
@@ -124,28 +129,28 @@ func (l *logger) GetLevelFromType(t string) int {
 }
 
 // Write a Error message to the logger.
-func (l *logger) Error(msg ...any) {
-	l.Write("error", msg...)
+func (l *logger) Error(msg string, args ...any) {
+	l.Write("error", msg, args...)
 }
 
 // Write a Warning message to the logger.
-func (l *logger) Warning(msg ...any) {
-	l.Write("warning", msg...)
+func (l *logger) Warning(msg string, args ...any) {
+	l.Write("warning", msg, args...)
 }
 
 // Write a Info message to the logger.
-func (l *logger) Info(msg ...any) {
-	l.Write("info", msg...)
+func (l *logger) Info(msg string, args ...any) {
+	l.Write("info", msg, args...)
 }
 
 // Write a Debug message to the logger.
-func (l *logger) Debug(msg ...any) {
-	l.Write("debug", msg...)
+func (l *logger) Debug(msg string, args ...any) {
+	l.Write("debug", msg, args...)
 }
 
 // Write a Test message to the logger.
-func (l *logger) Test(msg ...any) {
-	l.Write("test", msg...)
+func (l *logger) Test(msg string, args ...any) {
+	l.Write("test", msg, args...)
 }
 
 // Colorize a message based on the loglevel
