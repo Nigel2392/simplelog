@@ -7,46 +7,6 @@ import (
 	"time"
 )
 
-// ANSI color codes
-const (
-	Reset        string = "\033[0m"
-	Red          string = "\033[31m"
-	Green        string = "\033[32m"
-	Yellow       string = "\033[33m"
-	Blue         string = "\033[34m"
-	Purple       string = "\033[35m"
-	Cyan         string = "\033[36m"
-	White        string = "\033[37m"
-	BrightRed    string = "\033[31;1m"
-	BrightGreen  string = "\033[32;1m"
-	BrightYellow string = "\033[33;1m"
-	BrightBlue   string = "\033[34;1m"
-	BrightPurple string = "\033[35;1m"
-	BrightCyan   string = "\033[36;1m"
-)
-
-// Standard logger interface.
-// Every logger should implement this interface.
-// To be used by the framework.
-type Logger interface {
-	// Set the standard output
-	SetStd(std *os.File)
-	// Set the standard output for errors
-	SetStdErr(std *os.File)
-	// Write a message
-	Write(t string, message string, args ...any)
-	// Write an error message
-	Error(msg any, args ...any)
-	// Write a warning message
-	Warning(msg string, args ...any)
-	// Write an info message
-	Info(msg string, args ...any)
-	// Write a debug message
-	Debug(msg string, args ...any)
-	// Write a test message
-	Test(msg string, args ...any)
-}
-
 // Default logger
 type logger struct {
 	Level  string `json:"level"`
@@ -111,6 +71,7 @@ func (l *logger) Write(t string, message string, args ...any) {
 func (l *logger) GetLevel() int {
 	return l.GetLevelFromType(l.Level)
 }
+
 func (l *logger) GetLevelFromType(t string) int {
 	switch t {
 	case "error":
@@ -160,26 +121,6 @@ func (l *logger) Debug(msg string, args ...any) {
 // Write a Test message to the logger.
 func (l *logger) Test(msg string, args ...any) {
 	l.Write("test", msg, args...)
-}
-
-// Colorize a message based on the loglevel
-func Colorize(level int, msg string) string {
-	var selected string
-	switch level {
-	case 0:
-		selected = Purple
-	case 1:
-		selected = Green
-	case 2:
-		selected = Blue
-	case 3:
-		selected = Yellow
-	case 4:
-		selected = Red
-	default:
-		selected = Green
-	}
-	return selected + msg + Reset
 }
 
 // Wrap a message with time
